@@ -1,0 +1,14 @@
+#!/bin/bash
+
+g++ -c simd.p5.cpp -o simd.p5.o
+
+MAX_ARR_SIZE=1024*1024*32
+for ((i = 1000; i <= MAX_ARR_SIZE; i *= 2))
+
+do
+
+#	echo size  $i
+	g++ -DSIZE=$i -o arraymult arrayMult.cpp simd.p5.o -lm -fopenmp
+	./arraymult
+done
+
